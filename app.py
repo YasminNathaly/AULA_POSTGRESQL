@@ -1,4 +1,4 @@
-app.py
+#app.py
 import streamlit as st
 from crud import criar_aluno, listar_alunos, atualizar_alunos, deletar_aluno
 # precisa instalar o streamlit
@@ -17,7 +17,7 @@ if menu == "Criar":
     if st.button("Cadastrar"):
         if nome.strip() != "":
             criar_aluno(nome, idade)
-            st.success("Aluno {nome} foi cadastrado com sucesso!")
+            st.success(f"Aluno {nome} foi cadastrado com sucesso!")
         else:
             st.warning("O campo nome não pode estar vazio")
 elif menu == "listar":
@@ -27,3 +27,16 @@ elif menu == "listar":
         st.table(alunos)
     else:
         st.info("nenhum aluno encontrado")
+
+
+elif menu == "Atualizar":
+    st.subheader("Atualizar idade")
+    alunos = listar_alunos()
+    if alunos:
+        id_aluno = st.selectbox("Escolha o aluno",[linha[0] for linha in alunos])
+        nova_idade = st.number_input("Nova idade", min_value=10, step=1)
+        st.button("Atualizar")
+        atualizar_alunos(id_aluno,nova_idade )
+        st.success(f"idade do aluno {id_aluno} atualizada com sucesso!")
+    else:
+        st.info("Nehum aluno disponível para atualidar")

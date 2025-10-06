@@ -1,4 +1,4 @@
-db.py
+#db.py
 #  pip instal psycopg2
 # pip install dotenv (INSTALAÇAO DE UMA VERSÃO ESPECÍFICA)
 import psycopg2
@@ -22,9 +22,11 @@ def connect():
     try:
         conexao = psycopg2.connect(**params)
         cursor = conexao.cursor()
+        print('Deu certo')
         return conexao, cursor
     except Exception as erro:
         print("Erro ao conectar ao banco de dados:", {erro})
         # except é usado para tratar erros, evitar que o programa pare de funcionar
         return None, None
     
+connect()
